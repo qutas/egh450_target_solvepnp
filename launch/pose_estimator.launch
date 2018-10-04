@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<launch>
+	<node pkg="egh450_target_solvepnp" type="pose_estimator" name="pose_estimator" clear_params="true" output="screen">
+		<!-- Radius of the circle target in meters -->
+		<param name="circle_radius" value="0.2" type="double"/>
+
+		<!-- HSV parameters are in OpenCV range [H:0->180;S:0->255;V:0->255] -->
+		<param name="hue_center" value="120" type="int"/>
+		<param name="hue_range" value="60" type="int"/>
+		<param name="val_min" value="100" type="int"/>
+		<param name="sat_max" value="255" type="int"/>
+		<param name="val_min" value="100" type="int"/>
+		<param name="val_max" value="255" type="int"/>
+
+		<!-- Setting this to true will tell the program to use "~image_raw" + "/compressed" instead -->
+		<param name="use_compressed" value="true" type="bool"/>
+
+		<!-- Topic remappings to connect to the correct camera -->
+		<remap from="~camera_info" to="/webcam/camera_info"/>
+		<remap from="~image_raw" to="/webcam/image_raw"/>
+		<remap from="~image_raw/compressed" to="/webcam/image_raw/compressed"/>
+		<!--
+		<remap from="~debug/image_raw/compressed" to="/debug_compressed"/>
+		<remap from="~overlay/image_raw/compressed" to="/overlay_compressed"/>
+		-->
+	</node>
+</launch>

@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import rospy
+from egh450_target_solvepnp.pose_estimator import PoseEstimator
+
+if __name__ == '__main__':
+	# Initialize
+	rospy.init_node('egh450_target_solvepnp', anonymous=True)
+
+	pe = PoseEstimator()
+
+	rospy.loginfo("Estimating circle poses")
+
+	# Loop here until quit
+	try:
+		rospy.spin()
+	except rospy.ROSInterruptException:
+		pass
+	finally:
+		# Shutdown
+		rospy.loginfo("Shutting down...")
+		pe.shutdown()
+		rospy.loginfo("Done!")
